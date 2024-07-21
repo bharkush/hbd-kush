@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 25th Birthday!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap" rel="stylesheet">
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+background: linear-gradient(to right, #fdfcfb, #e2d1c3);        
+	    height: 100%;
+	    margin: 0; padding: 0; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            font-family: 'Playfair Display', serif;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+            color: #333;
+            text-align: center;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Sacramento', cursive;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-top: 2rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+        }
+
+        h3 {
+            font-size: 2rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #0056b3;
+        }
+
+        /* Navigation styles */
+        nav {
+            background-color: #343a40;
+            padding: 1rem 0;
+        }
+
+       .tab-nav {
+    position: fixed; top: 0; left: 0; width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #666666;
+    padding: 0.5rem 0;
+    border-bottom: 2px solid #6F4E37;
+    z-index: 1000; /* Allows for horizontal scrolling on small screens */
+}
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* Each gallery item */
+.gallery-item {
+    width: calc(50% - 20px); /* Two columns with space between */
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+/* Slide-in animations */
+@keyframes slideInFromLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInFromRight {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Alternate animation classes for gallery items */
+.slide-in-left {
+    animation-name: slideInFromLeft;
+}
+
+.slide-in-right {
+    animation-name: slideInFromRight;
+}
+
+/* Image and caption styling */
+.gallery-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.gallery-image:hover {
+    transform: scale(1.1);
+}
+
+.gallery-caption {
+    text-align: center;
+    padding: 10px;
+    font-family: 'Caveat Brush', cursive;
+    color: #4a4a4a;
+}
+
+.tab-link {
+    flex-grow: 1;
+    text-align: center;
+    color: white;
+    font-size: 1rem;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: all 0.3s ease; /* Transition for all properties */
+    display: inline-block; /* Ensure inline-block for proper padding and positioning */
+}
+
+.tab-link:hover {
+    background-color: white;
+    color: black; /* Change text color on hover */
+    transform: scale(1.1); /* Increase size on hover */
+}
+
+.tab-text {
+    position: relative;
+}
+
+.tab-text::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: black;
+    transform: scaleX(0); /* Initial state: hidden */
+    transition: transform 0.3s ease;
+}
+
+.tab-link:hover .tab-text::before,
+.tab-link:focus .tab-text::before {
+    transform: scaleX(1); /* Full underline on hover or focus */
+}
+
+        /* Container styles */
+        .container {
+            max-width: 100%; width: 100%;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); flex: 1; overflow: auto;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .home-content {
+            display: block;
+        }
+
+        .about-section,
+        .gallery-section,
+        .dialogues-section,
+        .birthday-notes-section,
+        .languages-section,
+        .contact-section {
+            display: none;
+        }
+
+        .active {
+            display: block;
+        }
+
+        /* Gallery styles */
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .gallery-image {
+            display: block;
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-image:hover {
+            transform: scale(1.1);
+        }
+
+        /* Dialogue styles */
+          .container {
+            display: none;
+            padding: 20px;
+            color: #4a4a4a;
+            font-family: 'Caveat Brush', cursive;
+            color: #6F4E37; /* Coffee color */
+        }
+
+        .dialogue-container {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            background-color: #fff; /* White background for the container */
+        }
+
+        .dialogue-image-left, .dialogue-image-right {
+            width: 300px; /* Adjust this value as needed */
+            height: 300px; /* Adjust this value as needed */
+            border: 5px solid #6f4f3e;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            object-fit: cover; /* Ensures the image covers the area without distortion */
+        }
+
+        .dialogue-image-left:hover, .dialogue-image-right:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+
+        .dialogue-text-left, .dialogue-text-right {
+            flex: 1;
+            padding: 20px;
+            font-family: 'Caveat Brush', cursive;
+            color: #4a4a4a;
+            animation: slideInLeft 2s ease-in-out, slideInRight 2s ease-in-out;
+        }
+
+        .dialogue-text-left {
+            text-align: left;
+        }
+
+        .dialogue-text-right {
+            text-align: right;
+        }
+
+        /* Language list styles */
+        .language-list {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            margin-top: 1rem;
+        }
+
+        .language-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Animation keyframes */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInFromRight {
+            from {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Custom animations */
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .slide-in-from-right {
+            animation: slideInFromRight 1s ease-in-out;
+        }
+
+        .fade-in-scale {
+            animation: fadeInScale 1s ease-in-out;
+        }                                        
+   
+        footer {
+    width: 100%;
+    
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    padding: 1em 0;
+    background-color: #4a4a4a;
+    color: #ffffff;
+    font-size: 0.9em;
+    z-index: 1000;
+}
+
+        .gallery img {
+            width: 100%;
+            max-width: 400px;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
+
+        header h1 {
+            width: 100%; font-size: 4em;
+            margin: 0;
+            font-family: 'Sacramento', cursive;
+            letter-spacing: 1.5px;
+            animation: slideIn 2s ease-in-out;
+        }
+
+        .section-title {
+            font-size: 2.5em;
+            text-align: center;
+            color: #6F4E37;
+            margin-top: 30px;
+            font-weight: 700;
+            position: relative;
+            animation: fadeInSlideDown 1.5s ease-in-out;
+        }
+
+        .about-section .section-title {
+            color: #6F4E37;
+        }
+
+        .birthday-notes-section .section-title {
+            color: #6F4E37;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 50px;
+            height: 4px;
+            background-color: #6F4E37;
+            display: block;
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+
+        .content-box {
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            color: #4a4a4a;
+            margin-bottom: 20px;
+            font-size: 1.45em;
+            line-height: 1.8;
+            font-family: 'Caveat Brush', cursive;
+            color: #6F4E37;
+        }
+
+        .home-content {
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            margin: 20px;
+            font-size: 1.12em;
+            animation: slideInFromLeft 2s ease-in-out;
+            font-family: 'Caveat Brush', cursive;
+            color: #6F4E37;
+        }
+
+        @keyframes slideInFromLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInSlideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+.confetti {
+    width: 10px;
+    height: 10px;
+    background-color: #ffcc00; /* Yellow */
+    position: absolute;
+    animation: confetti-fall 5s ease-out infinite;
+  }
+  
+  @keyframes confetti-fall {
+    0% {
+      transform: translateY(-100vh) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh) rotate(360deg);
+      opacity: 0;
+    }
+  }
+ #confettiButton {
+        background-color: #6f4e37; /* Coffee background */
+        color: white; /* White text */
+        padding: 15px 32px; /* Padding */
+        text-align: center; /* Center text */
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px; /* Font size */
+        margin: 4px 2px; /* Margin */
+        cursor: pointer; /* Cursor on hover */
+        border-radius: 12px; /* Rounded corners */
+        border-color: transparent; /* Transparent border */
+    }
+
+    /* Button hover effect */
+    #confettiButton:hover {
+        background-color: #808080; /* Grey*/
+    }
+
+    /* Button click effect */
+    #confettiButton:active {
+        background-color: #808080; 
+    }
+    </style>
+</head>
+<body>
+padding-top: 100 rem;
+    <!-- Party Popper Element -->
+    <div class="party-popper hidden" id="partyPopper"></div>
+<header>
+    <nav class="tab-nav">
+    <a href="#home" class="tab-link" onclick="showSection('home')" aria-controls="home" aria-selected="true">
+        <span class="tab-text">Chaliye shuru karte hain!</span>
+    </a>
+    <a href="#about" class="tab-link" onclick="showSection('about')" aria-controls="about" aria-selected="false">
+        <span class="tab-text">Aapke baare me kuch kaha jaaye?</span>
+    </a>
+    <a href="#gallery" class="tab-link" onclick="showSection('gallery')" aria-controls="gallery" aria-selected="false">
+        <span class="tab-text">Let's fly KI!</span>
+    </a>
+    <a href="#dialogues" class="tab-link" onclick="showSection('dialogues')" aria-controls="dialogues" aria-selected="false">
+        <span class="tab-text">Bollywoooood</span>
+    </a>
+    <a href="#birthday-notes" class="tab-link" onclick="showSection('birthday-notes')" aria-controls="birthday-notes" aria-selected="false">
+        <span class="tab-text">How about a CHITTHI?</span>
+    </a>
+    <a href="#languages" class="tab-link" onclick="showSection('languages')" aria-controls="languages" aria-selected="false">
+        <span class="tab-text">Let's try languages!</span>
+    </a>
+    <a href="#contact" class="tab-link" onclick="showSection('contact')" aria-controls="contact" aria-selected="false">
+        <span class="tab-text">Acha chalte hain ab!</span>
+    </a>
+</nav>
+
+    <h1><br>Happy 25th Birthday!</h1>
+<button id="confettiButton" onclick="createConfetti()">Let's Celebrate!</button>
+    <div id="home" class="container home-content active fade-in">
+        <h2>Hey Kushagra!</h2>
+        Bahut socha ki engineers ko non-engineers birthday kaise wish kar sakte hain that they feel loved? Now, this non-engineer had to think of an "engineer-like" way of doing it. Well, what better than using my aadhi adhoori knowledge about HTML websites to do something. (Glad that with Mathematics as majors, I chose Computer Science as minors.🤩)
+        <br>Fortunately, one of my subjects back then was HTML Designing & Cascading Style Sheets. Wasn't sure at all if I'd be able to do this. Tried website designing platforms like Wix and Canva. But it was a pain designing wahan pe. Fir realised ki kuch actually achha kaam karne ke liye, we need to get back to the basics. So yeah, opened sabse basic cheez - Notepad and started writing HTML codes. <br>Special thanks to ChatGPT. He was generous enough to help wherever my memory and knowledge of codes ditched me. I have to appreciate the kind of patience he kept throughout the designing process.. The poor guy did not slap me even once in irritation despite the fact that I asked him a million times for help. ChatGPT is such a good guy. 
+<p>So, here is a little gift, my dearest engineer! Hope you like it.</p>
+        <h3>Have an amazing birthday, and an even more amazing year ahead. Good wishes on your big day!</h3>
+    </div>
+</header>
+
+<div id="about" class="container about-section fade-in">
+    <h2 class="section-title">Kushagra</h2>
+    <div class="content-box">
+	<h4>Disclaimer: Bahut zyaada tareef ahead!</h4>
+        <p>
+            As I sit down to pen this birthday note for you, I cannot help thinking (and the tareef begins!) ki bhagwaan ji has created innumerable stars, vast galaxies, the planets in our Solar System (Special Mention: Earth & Neptune), majestic mountains, sparkling waterfalls, lush pastures, gentle rains, and everything above and below. Perhaps, bhagwaan ji felt that the universe was still incomplete even after adding all of these things to our world. He paused the creation of these wonders for a while to focus on crafting a masterpiece. After a lot of contemplation and effort, God decided to create something truly extraordinary: YOUUU!
+        </p>
+        <p>
+            He embarked on the journey of shaping someone as remarkable as you and chose this very day, 25 years ago in Jaipur to bring you into the world. Your presence has made our world and our lives infinitely more vibrant and beautiful.</p>
+        <p> Now, I know you'll say, <i>"Agar universe me itni hi kami thi ki mujhe banana pada to add good things in the world, toh mere baad aur log kyu paida huye?" </i> Well, that's where <b>the law of averages</b> comes into play. Tum zyada hi achhe the, so to balance out ki duniya me 'saamaanjasya ki sthaapna ho' (bas aise hi hindi bolne ka mann ho gaya. Yes, you're right saamaanjasya means equilibrium), he had to add a lot more imperfect people to the world.</p>
+        <p>Happy Birthday, Kushagra! Thank you for filling my life with so much of love and happiness.</p>
+    </div>
+    <h3 class="section-title">Kuch interesting ho jaaye?</h3>
+    <div class="content-box">
+        <ul class="fancy-list" style="text-align: left;">
+            <li >‘Lol’ is your favourite word.</li>
+            <li>A very important rule in your life is to rewatch the older seasons of web-series in order to "revise" before you begin with a new one. Fan toh tum ho web series ke, agreed!</li>
+            <li>Yes yes, I know road vehicles are stupid, and only metros and trains have the right to be used as modes of transport.</li>
+            <li>Isse yaad aaya, your love and dedication towards Google Maps! Oh my God! Jahan ka raasta pata ho, unme bhi Google Maps. Sachcha pyaar and loyalty towards Google Maps, I see.</li>
+            <li>Not to forget the number of apps on your phone. Moon ki position dekhne ke liye bhi app hai. Kyu bhai?!</li>
+	    <li>Oh, and yes, Borivali aur Kandivali ke beech me Thambivali naam ka station definitely aata hai.</li>
+	    <li>Please accept that given a choice between Appy and 7Up Nimbooz, you'll almost always choose the latter.</li>
+	    <li>Breakfasts/ coffee-catchups with you are always energizing. SME Product Team ko jhelne ki shakti milti hai.</li> 
+            <li>You very fondly remember P-41, Tonk Road, Jaipur as your happy place. Isiliye, one of your gifts is related to Jaipur and Nani and Nanaji ka ghar. Hope it brings back some sweet memories of that place. Gift  abhi next tab dekhenge tab you'll get it.</li>
+            <li>All these points aside, let me just tell you the amount of love and appreciation and respect my heart holds for you. From participating in my endless rant sessions about SME and all the weird animals I found there (from Kaali Billi to cockroach) to helping me improve my credit score (God, I need to start following your credit card ke baare me suggestions, and yes, poora vishwas hai mujhe that my finances are in the most able hands. They'll never let me miss any opportunity for cashbacks, offers on flight tickets and credit card bills), you've been there through all of it. From discussing politics, to my (or maybe OUR) love for BJP & Modiji, to finance, to roz ke never-ending office dilemmas pe endless discussions, I love every day I spend with you.</li>
+	    <li>You are the sweetest and the very best.</li>
+	    <li>P.S.: I actually lose all my decision-making ability when you are around. I can conveniently switch-off my dimaag when I'm with you. Good thing? Bad thing? Yet to figure out!😂</li> 
+        </ul>
+    </div>
+</div>
+
+<div id="gallery" class="container gallery-section fade-in">
+    <h2 class="section-title">Gallery with a twist?</h2>
+    <div class="gallery" style="font-size: 20px;">
+<br>
+	Ladies and gentlemen! Chaliye, let me introduce you to Kushagra Bhargava! Allow me to share some pictures to do that better. <br>  
+	Apni kursiyon ki petiyaan kaskar baandh lijiye kyuki ye vimaan sankhya KB-1707 ab udaan ke liye taiyaar hai. Kisi bhi paristhithi me vimaan ke andar hawa ka dabaav kam nahi hoga aur na hi oxygen masks upar se neeche aayenge kyuki hum iss baat ko sunishchit karenge ki aapko kisi prakaar ki koi samasya na ho. Iss udaan me hamare saath hain hamare vimaan ke kaptaan Kushagra Jayesh Bhargava aur seh-kaptaan Ishita Srivastava. Udaan ka apne gantavya par pahuchne ka anumaanit samay 4,000 saal hai. Apne iss safar ke liye hamara chayan karne ke liye aapka dhanyawaad. Hum aasha karte hain ki aapka hamare saath ye safar yaadgaar, mangalmay evam aaraamdaayak rahega. <br> Assuring you of our best services and unconditional love! Let's fly KI! 
+
+<div class="gallery-item slide-in-left">
+<img src="IMG-20231025-WA0144.jpg" alt="Image 1" class="dialogue-image-left">
+<div class="gallery-caption fade-in">    
+This is Kushagra. I know you'd already have fallen in love with his smile by now, but hold on. <br>Let me tell you more about him. I'm sure you'd love him crazily after that, just like I do. Let's go! </div> </div>
+ 
+<div class="gallery-item slide-in-right">        
+<img src="IMG-20230824-WA0060.jpg" alt="Image 1" class="dialogue-image-left"> 
+<div class="gallery-caption fade-in">
+Kahan se shuru karein fir? Chalo let's begin with a picture from his Induction Program. <br>Dikh hi raha hai wo toh, smart toh hai hi. Usme toh khair koi doubt hi nahi.</div> </div>
+
+<div class="gallery-item slide-in-right">
+<img src="IMG-20240218-WA0024.jpg" alt="Image 1" class="dialogue-image-left"> 
+<div class="gallery-caption fade-in">
+Kushagra is that good boy who takes care of everyone. </div> </div> 
+
+<div class="gallery-item slide-in-left">
+<img src="IMG-20231212-WA0033.jpg" alt="Image 1" class="dialogue-image-left"> 
+<div class="gallery-caption fade-in">  
+School me Master Rustomjee bhi bana tha.</div> </div>   
+
+
+<div class="gallery-item slide-in-left">        
+<img src="IMG-20230824-WA0058.jpg" alt="Image 1" class="dialogue-image-left"> 
+<div class="gallery-caption fade-in">
+Ab Jaipur jaakar aur bhi ache se drive bhi karne laga hai.<br> Long drive?</div> </div>
+
+<div class="gallery-item slide-in-right">         
+<img src="20231110_152858.jpg" alt="Image 1" class="dialogue-image-left"> 
+<div class="gallery-caption fade-in">
+Ekdum decent, pyaara, sanskaari, "sarv-gunn sampann" bachcha bhi hai. Look at this picture! Ekdum aisi ki kisi ladki ke gharwaalon ko dikha de toh impress ho jaayein turant.</div> </div>
+
+<div class="gallery-item slide-in-left">         
+<img src="IMG-20231208-WA0041.jpg" alt="Image 1" class="dialogue-image-left"> 
+<div class="gallery-caption fade-in">
+Jab mujhe stress hota hai office ka ya padhai ka toh kuch bhi karke hamesha mood bhi theek kar deta hai. I don't think there's ever been a time when I've come to you with a bad mood and you've not flipped the mood 180 degrees within minutes.</div> </div>
+
+<div class="gallery-item slide-in-right">        
+<img src="IMG-20230901-WA0011.jpg" alt="Image 1" class="dialogue-image-left"> 
+<div class="gallery-caption fade-in">
+Table tennis bhi khelta hai, bowling bhi karta hai, cricket bhi khelta hai. Throwback to the 3 games of air hockey that day. Amazingg! You remember right that I won two of them? Ladayi mat karna mujhse ab😂</div> </div>
+
+<div class="gallery-item slide-in-left">        
+<img src="IMG-20240118-WA0005.jpg" alt="Image 1" class="dialogue-image-left"> 
+<div class="gallery-caption fade-in">
+Sandeep Maheshwari se bhi zyaada acha motivational speaker bhi hai.</div> </div>
+
+<div class="gallery-item slide-in-right">        
+<img src="IMG-20240218-WA0050.jpg" alt="Image 1" class="dialogue-image-left"> 
+<div class="gallery-caption fade-in">
+Aur kabhi bhi aisa hota hai ki handsome nahi lage? Oh God, sawaal hi nahi uthta yeh toh!</div> </div>
+                       
+<div class="gallery-item slide-in-left">        
+<img src="IMG-20240218-WA0026.jpg" alt="Image 1" class="dialogue-image-left"> 
+<div class="gallery-caption fade-in">
+Ab chaahe traditional wear me dekh lo. Yahan bhi he'd look equally good hi.</div> </div>
+
+<div class="gallery-item slide-in-right">        
+<img src="IMG-20240218-WA0025.jpg" alt="Image 1" class="dialogue-image-left"> 
+<div class="gallery-caption fade-in">
+Yahan bhi!</div> </div>
+
+<div class="gallery-item slide-in-left">        
+<img src="IMG-20240713-WA0004.jpg" alt="Image 1" class="dialogue-image-left"> 
+<div class="gallery-caption fade-in">
+You know right ki chhote bachchon se kitna zyaada door rehne ka mann karta hai mera. <i>All thanks to Anunay and Sarthak jinhone duniya ke saare bachchon ki image hi kharaab kar di meri nazron me!</i> But but but, look at this picture!</div> </div>
+
+<div class="gallery-item slide-in-right">        
+<img src="IMG-20240713-WA0006.jpg" alt="Image 1" class="dialogue-image-left"> 
+<div class="gallery-caption fade-in">
+Why Kushagra? Why! Why were you in a habit of marking yourself in all photos? Iske peeche ka raaz jaan'na hai mujhe.</div> </div>
+
+<div class="gallery-item slide-in-left">        
+<img src="IMG-20240713-WA0005.jpg" alt="Image 1" class="dialogue-image-left"> 
+<div class="gallery-caption fade-in">
+You remember standard 5th-6th me mathematics ki books me word problems hote the.. "Ram bought 100 watermelons and 500 apples." In this case, Kushagra is doing that. Acha also, Mumbai aate hi, 'kalingad' was amongst the first few Marathi words that got added to my dictionary. Aur Mumbai aate hi, YOU were amongst the first few people I started talking to. Now this picture has KALINGAD also and KUSHAGRA also!</div> </div>
+
+<div class="gallery-item slide-in-right">        
+<img src="IMG-20240713-WA0010.jpg" alt="Image 1" class="dialogue-image-left"> 
+<div class="gallery-caption fade-in">
+Such heart-warming pictures yaar!<br>Oh and yes, bahut hi big 'thank you' to aunty. She'd been so sweet and caring all the while I was unwell. She went through all the medicines that doctor had prescribed. Even looked up Google pe. "Have milk twice, have meals properly." Ulcers se fever tak she kept checking on everything so many times. Definitely felt like (suitable word nahi mil raha for that feeling, but bahut bahut grateful definitely)</div> </div>
+
+<div class="gallery-item slide-in-left">        
+<img src="IMG-20240713-WA0043.jpg" alt="Image 1" class="dialogue-image-left"> 
+<div class="gallery-caption fade-in">
+Cannot think of a caption that would suit this picture. 😅 Ruko sochti hu. <br> Acha tell me something, mujhse unse dar kyu lagta hai😅 Aisa lagta hai ki whenever I meet him, I'll probably just say, "Good morning, sir!" and I'll fumble and say something stupid like, "My name is Mahindra, and I'm from Ishita" and then feel crazily embarrassed and sit quietly in a corner.😂</div> </div>
+
+<div class="gallery-item slide-in-right">        
+<img src="IMG-20240714-WA0002.jpg" alt="Image 1" class="dialogue-image-left"> 
+<div class="gallery-caption fade-in">
+Highlight: The wind chimes behind you and nanaji. Took kaafi effort to find one that matched your description: Four metal rods, with some object dangling using a longer string in the centre. So, since you used to say that P-41, Tonk Road was your happy place, and you remember those wind chimes very dearly, I thought wind chimes of the similar type can be a good birthday gift for you. Ab sadly I wouldn't be able to recreate that moment for you jahan tum daudkar aaoge aur koodkar wind chimes pe haath lagaoge but atleast you'll have these wind chimes. Hawa se when the rods would clink, I hope they remind you of P-41 and of me!</div> </div>
+
+<div class="gallery-item slide-in-left">        
+<img src="IMG-20240714-WA0001.jpg" alt="Image 1" class="dialogue-image-left"> 
+<div class="gallery-caption fade-in">
+Mudita mausi is definitely the family member I've heard the most about. Ab convocation saree wali photos dekhkar actually lagta hai ki I won an election😂 Bas ek manifesto haath me pakad kar pose karni ki kami thi. What would I have written usme waise? Duniya ke saare logon ko vegetarian banane ka sankalp le leti? Yesss! Hail Vegetarianism!😂 Chicken, mutton, doggie, billi, octopus kuch mat khaaya karo Kushagraaaaaaa! </div> </div>
+
+<div class="gallery-item slide-in-right">        
+<img src="IMG-20240713-WA0040.jpg" alt="Image 1" class="dialogue-image-left"> 
+<div class="gallery-caption fade-in">
+Purvi diii! Family member #2 jinke baare me sabse zyaada suna hai. Infact, sabse zyaada dekha bhi hai. A lot of her wedding pictures and videos in my gallery abhi bhi. Kushagra itna complan piya hai tumne ki frame se baahar jaa rahe😂</div> </div>
+
+<div class="gallery-item slide-in-left">        
+<img src="IMG-20240714-WA0005.jpg" alt="Image 1" class="dialogue-image-left"> 
+<div class="gallery-caption fade-in">
+Heyy Virik! Heard a lot of stories about the two of you. See you soon!</div> </div>
+
+<div class="gallery-item slide-in-right">        
+<img src="IMG-20240713-WA0045.jpg" alt="Image 1" class="dialogue-image-left"> 
+<div class="gallery-caption fade-in">
+Such a vibrant festive picture!</div> </div>
+
+<div class="gallery-item slide-in-left">        
+<img src="IMG-20240713-WA0039.jpg" alt="Image 1" class="dialogue-image-left"> 
+<div class="gallery-caption fade-in">
+I think I can correctly identify everybody for Anshita di's wedding now!</div> </div>
+
+<div class="gallery-item slide-in-right">        
+<img src="IMG-20240713-WA0044.jpg" alt="Image 1" class="dialogue-image-left"> 
+<div class="gallery-caption fade-in">
+Good throwback picture?</div> </div>
+
+<div class="gallery-item slide-in-left">        
+<img src="IMG-20240517-WA0020.jpg" alt="Image 1" class="dialogue-image-left"> 
+<div class="gallery-caption fade-in">
+Nanaji ke aur baaki sabke gifts ka bhi kitna dhyaan rakhta hai ye pyaara ladka. <br>That just made me look at my wrist. Wearing the bracelet you gave.</div> </div>
+
+<div class="gallery-item slide-in-right">        
+<img src="20240714_091717.jpg" alt="Image 1" class="dialogue-image-left"> 
+<div class="gallery-caption fade-in">
+Acha ek baat batao.. inn photos me idhar udhar dekhkar.. were you looking for me? Aagayi bas next photo me!</div> </div>
+
+<div class="gallery-item slide-in-left">         
+<img src="Snapchat-646162892.jpg" alt="Image 1" class="dialogue-image-left"> 
+<div class="gallery-caption fade-in">
+Mera bhi dhyaan rakhta hai hamesha. Usse milkar hamesha acha bhi lagta hai. HAMESHA! </div> </div>
+
+<div class="gallery-item slide-in-right">         
+<img src="IMG-20240616-WA0034.jpg" alt="Image 1" class="dialogue-image-left"> 
+<div class="gallery-caption fade-in">
+One of those good and bahut time tak cherish karne-able (uff, kitni hinglish use karne lagi hu) memories definitely. <br>PS: "Suna hai tumhe airport pe lene aaya tha koi?" <i>Wo kaun tha, oh sorry, wo kaun THI, Kushagra?</i></div> </div>
+
+<div class="gallery-item slide-in-left">         
+<img src="Snapchat-1546592102.jpg" alt="Image 1" class="dialogue-image-left"> 
+<div class="gallery-caption fade-in">
+One of the all-time favourite photos. Simple and sweet!</div> </div>
+
+<div class="gallery-item slide-in-right">     
+<img src="Snapchat-1838688928.jpg" alt="Image 1" class="dialogue-image-left"> 
+<div class="gallery-caption fade-in">
+Mujhe acha sa ghar ka khaana bhi khilaata hai. Birthday wali gobhi was amazinggg.</div> </div>
+
+<div class="gallery-item slide-in-left">       
+<img src="Snapchat-1272220330.jpg" alt="Image 1" class="dialogue-image-left"> 
+<div class="gallery-caption fade-in">
+Maza bhi aata hai hamesha uske saath. Ohh, I look kaafi bad. Hata deni chahiye kya ye photo? But okay koi nahi. Your birthday. All spotlights should be on youuu!</div> </div>
+
+<div class="gallery-item slide-in-right">         
+<img src="IMG-20240210-WA0037.jpg" alt="Image 1" class="dialogue-image-left"> 
+<div class="gallery-caption fade-in">
+Permanent Booking? 200% YES! Aapki permanent booking hogayi hai maharaaj! <br>You're the sweetest, the best.Happiest birthday, dearest Kushagra!</div> </div>
+
+<br>
+<p>Haan, toh yaatrigan bataiye, kya vimaan sankhya KB-1707 safaltapoorvak aur surakshit apne gantavya pe pahuch paaya hai? (Don't worry, before time arrival hai. 4000 saal abhi poore nahi huye hain) Aasha karte hain ki aap sabne iss yaatra ka aanad uthaaya hoga aur hume punaah sewa ka avsar pradaan karenge. <br> See you soon, until then, let's fly KI!</p>
+
+<p>Extremely proud of this website, and of ChatGPT ofcourse! A little something that would make you smile even brighter. Chalo, let's see a short video!</p>
+
+<div class="gallery-item slide-in-left">
+<video width="600" controls>
+<source src="InShot_20240709_222702593 (1).mp4" type="video/mp4"></video>
+<div class="gallery-caption fade-in"> Hope this brings back all bitter-sweet (Bitter-sweet? Naaa. Sirf sweet memories yaad karni hain) memories of the 390 days we've had together, and ofcourse, of how all of this started! <br>PS.: I'm not returning this black Lenovo laptop charger even when I leave Mahindra. Par kahungi kya ki kyu nahi wapas kar rahi? Kho gaya? Toot gaya? Fenk diya? Chalo anyways, ye tumhara homework hoga ab ki charger nahi wapas karne ke liye kya keh sakte hain. <br>
+PPS: Acha, are you smiling? Yes? No?<br>
+Yes? KUSH KHUSH? Wow! Mission accomplished.
+    </div>
+</div>
+
+</div>
+</div>
+<div id="dialogues" class="container dialogues-section fade-in">
+        <h2 class="section-title fade-in">Dialogues</h2>
+        <div class="content-box fade-in">
+        <p>Because you love web series (and that is how you introduced yourself to me the day we started talking - the EPIC CHARGER DAY : 23rd June, 2023), and Ananya once said, "Love people the way they like to be loved."
+        So here is some love for you, the way you like it to be.<br>
+        Presenting some of the greatest dialogues from your favorite movies and web series:</p>
+        <div class="dialogue-container fade-in">
+    <img src="https://tse2.mm.bing.net/th?id=OIP.5sv6gpmvB6PW3vgRcnugMQHaEK&pid=Api&P=0&h=220" alt="Dialogue Image" class="dialogue-image-left">
+    <div class="dialogue-text-left fade-in">
+        <p>"Because while everything around you is changing, you will be happy to know that there are a few things that remain constant. And it is important because these constants are comforting. I want to be that comforting constant for you." <br>- Little Things</p>
+	<p><u>Why this dialogue:</u> Because I absolutely want you to be that <i>comforting constant</i> and I'm ready to be the same for you.</p> 
+    </div>
+</div>
+<div class="dialogue-container fade-in">
+    <img src="https://curlytales.com/wp-content/uploads/2019/04/C4PL0vUVMAAQHOn.jpg" alt="Kush's Dialogue Image" class="dialogue-image-right">
+    <div class="dialogue-text-left fade-in">
+        <p>"Tum pehle bhi itne khoobsurat the ya waqt ne kiya koi haseen sitam?" <br>- Yeh Jawaani Hai Deewani</p>
+<p><u>Why this dailogue:</u> Well, kaafi self-explanatory. The only difference being ki in the movie Ranbir said this for Deepika, and here I'm saying this for you.</p>
+    </div>
+</div>
+<div class="dialogue-container">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTB-t7u3_Q_HvFARR7JEmzUOqrpBiULI_BgPA&s.jpg" alt="Kush's Dialogue Image" class="dialogue-image-right">
+    <div class="dialogue-text-left">
+        <p>"Jab hum apne aap ko achhi tarah samajh lete hai, to dusre kya samajhte hai, it doesn't matter. Not at all!" <br>- Dear Zindagi</p>
+<p><u>Why this dialogue:</u> To give you a whole new level of motivation, strength and determination to decide what you really want to take up - something new and challenging - and excel it. To do something that you love, something that would be life changing.</p>
+    </div>
+</div>
+<div class="dialogue-container">
+    <img src="https://a1cf74336522e87f135f-2f21ace9a6cf0052456644b80fa06d4f.ssl.cf2.rackcdn.com/images/characters/large/800/Cooper.Interstellar.webp" alt="Kush's Dialogue Image" class="dialogue-image-right">
+    <div class="dialogue-text-left">
+        <p>"We've always defined ourselves by the ability to overcome the impossible. And we count these moments. These moments when we dare to aim higher, to break barriers, to reach for the stars, to make the unknown known. We count these moments as our proudest achievements." <br>- Interstellar</p>
+<p><u>Why this dialogue:</u> Let's work together and do somnething so incredibly amazing that when we look back that all the years we have spent making ourselves better - academically, professionally and personally -  we also count such moments aise hi.</p>
+    </div>
+</div>
+<div class="dialogue-container">
+    <img src="msid-106125976.jpg" alt="Kush's Dialogue Image" class="dialogue-image-right">
+    <div class="dialogue-text-left">
+        <p>"Haan, tumhara hi khyaal hai. Warna yoon akele baithkar kaun muskuraata hai!" <br>- Flames</p>
+<p><u>Why this dialogue:</u> Easiest one to guess. Kyuki aisa kabhi nahi hota ki tumhara khyaal nahi rehta ho mann me. You're the best.</p>
+    </div>
+</div>
+<div class="dialogue-container">
+    <img src="Snapchat-1398721741.jpg" alt="Kush's Dialogue Image" class="dialogue-image-right">
+    <div class="dialogue-text-left">
+        <p>Wanted to try your way of expressing love - self-written poems. Sat down to write one but couldn't. Asked ChatGPT and MetaAI but there seemed to be nothing that could fit in right. You definitely are better at this. Thoda time do. Ek achi si 4-liner likhti hu. Tab tak, have a look at the picture alongside. By far, one of the best days with you. <br> (Am I allowed to tareefo-fy you just a little more by saying, "Tumhare saath toh har din hi achaa hota hai!" Smiling? Good. Mission Accomplished again!)</p>
+    </div>
+</div>
+
+    </div>
+</div>
+
+<div id="birthday-notes" class="container birthday-notes-section fade-in">
+    <h2 class="section-title">Birthday Notes</h2>
+    <div class="content-box fade-in" >
+        <p style="text-align: left;">Dearest Kushagra,</p>
+        <p style="text-align: left;">Happy Birthday once again!</p>
+        <p style="text-align: left;">Sheer coincidence how a simple miss could weave the threads of our bond so beautifully and so intricately. Our journey from acquaintances and colleagues to friends to today! 'Amazinggggg' is the word for it. <br> 
+Our bond is like the function y = e^1729x. Every time tha you take the derivative of this function, it grows by 1729 times while the rest of it remains contant. Oh wow, mathematical ho raha. Okay, thodi aur mathematics daalte hain isme. <br>
+x = 16 * sin ^3 (t) <br>
+y = 13 * cos (t) - 5 * cos (2t) - 2 * cos (3t) - cos (4t) <br>
+The graph looks somewhat like this: <br>
+<img src="Screenshot 2024-06-13 223921.png" alt="Kush's Dialogue Image" class="dialogue-image-right" style="text-align: center;"> <br>
+That's how mathematics celebrates love. Ab ye function yaad rakhna. Can ask you randomly kabhi at breakfast.<br>
+Okay, coming back from mathematics to celebrating your birthday again.</p>
+        <p>Nothing but love and good wishes for you on your big day. May your birthday be as bright and as special as you are!</p>
+	<p>Here's a little something for you:</p>
+	<p style="text-align: center;">जो लफ्ज़ जुबान तक नहीं आ पाते मेरी, वो उन्हें भी पहचानता है,<br>
+एक लड़का है, जो मुझे मुझसे भी ज़्यादा जानता है । <br>                                           
+
+सूझ-बूझ में सबसे आगे है, थम जाता है जब दुनिया भागे है,<br>
+मेरी कहानियों को बड़े इत्मीनान से सुनता है,<br>
+मेरे शब्दों पे पलकें रखकर शायद वो भी सपने बुनता है,<br>
+कुछ छुपाती हूँ उससे तो ना जाने कैसे जान जाता है,<br>
+हर बार, हर बार बस यूं ही सब समझ जाता है,<br>
+उसे रास्तों की परवाह नहीं, वो खुद को लहर मानता है,<br>
+एक लड़का है, जो मुझे मुझसे भी ज़्यादा जानता है।  </p>
+        <p style="text-align: left;">I am excited to celebrate festivals with you, to be there with you through all that life offers, to tick mark all of my bucket list items with you, to see Northern Lights with you, to give you a refreshing glass of nimbu paani after you return from work, to cook for you, to cook with you, to grow, prosper and succeed together! Wishing you all the happiness and success in the world. Enjoy your day to the fullest!</p>
+        <p style="text-align: left;">Love & Gooooood Wishes,<br>
+        Ishita </p>
+    </div>
+</div>
+<section id="languages" class="container languages-section fade-in">
+    <h2 class="section-title">Let's try languages!</h2>
+    <div class="content-box fade-in">
+        <p>Love & good wishes know no geographical boundaries and barriers of expression and speech, right? Love speaks all languages, and so does the table below! No matter what the language is, the message remians the same all across - You are loved, cherished & valued! Enjoy your birthday!</p>
+
+<p><table border="1" style="border-collapse: collapse; width: 100%; border: 2px solid #6F4E37;font-size: 16px;">
+    <tr style="background-color: #6F4E37; color: white;">
+        <th style="width: 40%;"><u>Kahan chaloge batao?</u></th>
+        <th><u>Guess the Language</u></th>
+        <th><u>Message</u></th>
+    </tr>
+    <tr>
+        <td class="flag-column">Let's take you to the US on your birthday!</td>
+        <td>English</td>
+        <td>Happy Birthday! I love you!</td>
+    </tr>
+    <tr>
+        <td class="flag-column">Let's take you to Spain on your birthday!</td>
+        <td>Spanish</td>
+        <td>¡Feliz Cumpleaños! ¡Te quiero!</td>
+    </tr>
+    <tr>
+        <td class="flag-column">Let's take you to France on your birthday!</td>
+        <td>French</td>
+        <td>Joyeux Anniversaire! Je t'aime!</td>
+    </tr>
+    <tr>
+        <td class="flag-column">Let's take you to Germany on your birthday!</td>
+        <td>German</td>
+        <td>Alles Gute zum Geburtstag! Ich liebe dich!</td>
+    </tr>
+    <tr>
+        <td class="flag-column">Let's take you to Italy on your birthday!</td>
+        <td>Italian</td>
+        <td>Buon Compleanno! Ti amo!</td>
+    </tr>
+    <tr>
+        <td class="flag-column">Let's take you to Portugal on your birthday!</td>
+        <td>Portuguese</td>
+        <td>Feliz Aniversário! Eu te amo!</td>
+    </tr>
+    <tr>
+        <td class="flag-column">Let's take you to the Netherlands on your birthday!</td>
+        <td>Dutch</td>
+        <td>Gefeliciteerd! Ik hou van jou!</td>
+    </tr>
+    <tr>
+        <td class="flag-column">Let's take you to Russia on your birthday!</td>
+        <td>Russian</td>
+        <td>С Днём Рождения! Я тебя люблю!</td>
+    </tr>
+    <tr>
+        <td class="flag-column">Let's take you to Japan on your birthday!</td>
+        <td>Japanese</td>
+        <td>お誕生日おめでとう! 愛してる!</td>
+    </tr>
+    <tr>
+        <td class="flag-column">Let's take you to China on your birthday! (and no, we'll not eat bat/ octopus/ crocodile/ bandar/ bhaalu or any other animal there please. Hail Vegetarianism!)</td>
+        <td>Chinese (Mandarin)</td>
+        <td>生日快乐! 我爱你!</td>
+    </tr>
+    <tr>
+        <td class="flag-column">Let's take you to Korea on your birthday!</td>
+        <td>Korean</td>
+        <td>생일 축하해! 사랑해!</td>
+    </tr>
+    
+    <tr>
+        <td class="flag-column">Let's take you to Saudi Arabia on your birthday!</td>
+        <td>Arabic</td>
+        <td>عيد ميلاد سعيد! أحبك!</td>
+    </tr>
+    <tr>
+        <td class="flag-column">Let's take you to Africa on your birthday!</td>
+        <td>Swahili</td>
+        <td>Heri ya Siku ya Kuzaliwa! Nakupenda!</td>
+    </tr>
+    <tr>
+        <td class="flag-column">Let's take you to Greece on your birthday!</td>
+        <td>Greek</td>
+        <td>Χρόνια Πολλά! Σ'αγαπώ!</td>
+    </tr>
+    <tr>
+        <td class="flag-column">Let's take you to Turkey on your birthday!</td>
+        <td>Turkish</td>
+        <td>Doğum Günün Kutlu Olsun! Seni seviyorum!</td>
+    </tr>
+<tr>
+        <td class="flag-column">Chalo ab India wapas aa jaate hain. Kal office bhi jaana hai!</td>
+        <td>Hindi</td>
+        <td>जन्मदिन की अनेक शुभकामनायें! </td>
+    </tr>
+</table><br>Hanji toh ummeed hai ki aapka Geburtstag is going good. Happiest birthdayyy!</p>
+    </div>
+</section>
+<div id="contact" class="container fade-in">
+    <h2 class="section-title">Contact the Creator</h2>
+    <div class="content-box fade-in">
+        <p style="text-align: left;">Please feel free to contact us. You have all the addresses already.</p>
+	<p style="text-align: left;">Office, ghar aur Lucknow - sabke addresses hain hi tumhare paas</p>
+        <p style="text-align: left;">Email: <a href="mailto:ishita.srivastava2015@gmail.com">Dono mail IDs bhi hain hi I think</a></p>
+        <p style="text-align: left;">Phone: 9452197620 (Ab toh yaad karlo please)</p>
+        <p style="text-align: left;">Anything else that you need to contact me?</p>
+	<p style="text-align: left;">I am yet to decide ki mujhe iss website ka link tumhe raat me 12 baje bhejna hai or will I be able to contain my excitement till I meet you the next morning. Difficult choice, you see. Choice ki raat me jaldi se tumhe ye gift karke tumhara birthday right from the beginning special banana hai or should I wait so that I get to see your reactions first hand the next morning. </p>
+	<p style="text-align: left;">Chalo ye aaraam se sochungi. Filhaal, in case I decide to go with the former, please call me right away. I am waiting to know if this non-engineer could make my dearest engineer's birthday special.</p>
+	<p style="text-align: left;">Love and good wishes always!</p>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2024 Happy Birthday Kushagra. All rights reserved.</p>
+</footer>
+
+<script>
+    function showSection(id) {
+        var sections = document.querySelectorAll('.container');
+        sections.forEach(function(section) {
+            section.style.display = 'none';
+        });
+        var selectedSection = document.getElementById(id);
+        if (selectedSection) {
+            selectedSection.style.display = 'block';
+        }
+        var links = document.querySelectorAll('.tab-link');
+        links.forEach(function(link) {
+            link.setAttribute('aria-selected', 'false');
+            link.classList.remove('active');
+        });
+        var activeLink = document.querySelector('[href="#' + id + '"]');
+        if (activeLink) {
+            activeLink.setAttribute('aria-selected', 'true');
+            activeLink.classList.add('active');
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        showSection('home');
+    });
+
+document.addEventListener('DOMContentLoaded', function () {
+        const items = document.querySelectorAll('.gallery-item');
+
+        function checkSlide() {
+            items.forEach(item => {
+                const slideInAt = (window.scrollY + window.innerHeight) - item.clientHeight / 2;
+                const isHalfShown = slideInAt > item.offsetTop;
+                if (isHalfShown) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', checkSlide);
+        checkSlide();
+    });
+ function createConfetti() {
+      const confettiCount = 800; // Increase the number of confetti
+      const colors = ['#ff0000', '#00ff00', '#0000ff','ffd700','#800080','#00ffff','#c0c0c0','#50c878']; // Add more colors
+
+      for (let i = 0; i < confettiCount; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.left = `${Math.random() * 100}vw`; // Spread across the viewport width
+        confetti.style.animationDuration = `${Math.random() * 4 + 2}s`; // Vary animation duration
+        confetti.style.width = `${Math.random() * 20 + 10}px`; // Increase size
+        confetti.style.height = `${Math.random() * 20 + 10}px`; // Increase size
+        confetti.style.top = '-50px'; // Start from above the viewport
+
+        document.body.appendChild(confetti);
+
+        setTimeout(() => {
+          confetti.remove();
+        }, 5000); // Remove confetti after 5 seconds
+      }
+    }
+ document.getElementById('confettiButton').addEventListener('click', function() {
+        // Your confetti animation code here
+        generateConfetti();
+    });
+</script>
+
+</body>
+</html>
+
